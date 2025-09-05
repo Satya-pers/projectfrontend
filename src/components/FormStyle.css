@@ -1,0 +1,34 @@
+/* Login.css */
+
+.login {
+    background-image: url('./bg.avif');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.insidelogin{
+    position: relative;
+    right: 30px;
+    height: 400px;
+}
+
+/* Signup.css */
+
+.signup {
+    background-image: url('./bg.avif'); 
+    background-size: cover;
+    background-position: center;
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.insideSignup{
+    position: relative;
+    right: 30px;
+    height: 450px;
+}

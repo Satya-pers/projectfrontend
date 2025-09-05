@@ -1,0 +1,46 @@
+#body{
+    overflow-x: hidden;
+}
+#form{
+    width: 40%;
+    padding: 10px;
+}
+#lable{
+    text-align: left;
+}
+table{
+    text-align: center;
+}
+#navbarNav{
+    position: relative;
+    left: 800px;
+    
+}
+
+#img {
+  filter: brightness(0) invert(1);
+}
+
+#topbtn{
+    margin-right: 40px;
+    font-size: larger;
+}
+
+#img{
+    width: 15px;
+    height: 15px;
+}
+.hover-data {
+    
+    position: absolute;
+     top: 100%; 
+    left: -30px;
+    right: 20px;
+     background-color: #fff; 
+     border: 1px solid #ccc; 
+     padding: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    z-index: 1000;  
+    width: 450px;
+  }
+  
