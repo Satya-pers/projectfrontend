@@ -84,7 +84,8 @@ const Home = () => {
     const date = dateRef.current.value;
     const time = timeRef.current.value;
     const priority = priorityRef.current.value;
-    const dateTimeString = `${date} ${time}`;
+    const localDate  = new Date(`${date}T${time}`);
+    const utcDate = new Date(localDate.getTime() - localDate.getTimezoneOffset() * 60000);
 
     if (!title || !date || !time) {
       alert("Please fill in all fields");
@@ -94,7 +95,7 @@ const Home = () => {
     try {
       await axios.post("https://project-backend-7xq9.onrender.com/tasks/create-task", {
         task: title,
-        dateTime: dateTimeString,
+        dateTime:utcDate,
         priority,
         userEmail: loggedInUserEmail,
       });
@@ -126,8 +127,9 @@ const Home = () => {
       );
       const task = response.data;
       taskRef.current.value = task.task;
-      dateRef.current.value = task.dateTime.split(" ")[0];
-      timeRef.current.value = task.dateTime.split(" ")[1];
+      const dt = new Date(task.dateTime);
+      dateRef.current.value = dt.toISOString().split("T")[0];
+      timeRef.current.value = dt.toISOString().split("T")[1].slice(0,5); 
       priorityRef.current.value = task.priority;
       setEditingTask(task);
     } catch (error) {
@@ -139,7 +141,7 @@ const Home = () => {
     const title = taskRef.current.value;
     const date = dateRef.current.value;
     const time = timeRef.current.value;
-    const dateTimeString = `${date} ${time}`;
+    const dateTime = new Date(`${date}T${time}`);
     const priority = priorityRef.current.value;
 
     if (!title || !date || !time) {
@@ -150,7 +152,7 @@ const Home = () => {
     try {
       await axios.put(
         `https://project-backend-7xq9.onrender.com/tasks/update-task/${editingTask._id}`,
-        { task: title, dateTime: dateTimeString, priority }
+        { task: title, dateTime, priority }
       );
       fetchTasks(); //after update fetch tasks
 
@@ -296,7 +298,7 @@ const Home = () => {
           {tasks.map((task) => (
             <tr key={task._id}>
               <td>{task.task}</td>
-              <td>{task.dateTime}</td>
+              <td>{new Date(task.dateTime).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })}</td>
               <td>{task.priority}</td>
               <td>
                 <button

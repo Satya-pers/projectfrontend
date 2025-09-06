@@ -14,7 +14,7 @@ export default function Login() {
         try {
             const res = await axios.post("https://project-backend-7xq9.onrender.com/login", { email, password });
 
-            if (res.data === "exist") {
+            if (res.data === "exist") { 
                 navigate("/task", { state: { id: email } });
             } else if (res.data === "not exist") {
                 alert("Wrong credentials");
